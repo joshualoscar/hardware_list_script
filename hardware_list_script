@@ -1,0 +1,22 @@
+#! /bin/bash
+# By Joshua L.
+# 01-27-2015
+
+
+hostname >> $HOSTNAME.txt
+
+lsb_release -d >> $HOSTNAME.txt
+
+cat /proc/cpuinfo | grep "model name" >> $HOSTNAME.txt
+
+free -m >> $HOSTNAME.txt
+
+dmidecode --type 2 >> $HOSTNAME.txt
+
+ifconfig >> $HOSTNAME.txt
+
+hdparm -I /dev/sd* | grep "Number" >> $HOSTNAME.txt
+
+fdisk -l >> $HOSTNAME.txt
+
+nc -z $(ifconfig | grep "inet addr:" | grep "192.168.0" | cut -c 21-35) 1-65355 >> $HOSTNAME.txt
